@@ -1,0 +1,51 @@
+@import '../../iconfont.less';
+@import '~antd/lib/style/themes/default.less';
+
+.bas-slide-menu{
+    height: 100%;
+    background: rgb(234, 237, 241);
+    position: relative;
+    overflow: hidden;
+    overflow-y: auto;
+    &::-webkit-scrollbar {
+        width: 0;
+    }
+    position: relative;
+    .menu-icon{
+        min-width: 14px;
+        margin-right: 10px;
+    }
+}
+
+.icon {
+    width: 14px;
+    margin-right: 10px;
+  }
+  
+:global {
+    .ant-menu-inline-collapsed {
+        & > .ant-menu-item .sider-menu-item-img + span,
+        &
+        > .ant-menu-item-group
+        > .ant-menu-item-group-list
+        > .ant-menu-item
+        .sider-menu-item-img
+        + span,
+        & > .ant-menu-submenu > .ant-menu-submenu-title .sider-menu-item-img + span {
+            max-width: 0;
+            display: inline-block;
+            opacity: 0;
+        }
+        .ant-menu-item span{
+            transition: opacity 0.2s ease-in-out, width 0.2s ease-in-out;
+            max-width: 0;
+            display: inline-block;
+            opacity: 0;
+        }
+    }
+    .ant-menu-item .sider-menu-item-img + span,
+    .ant-menu-submenu-title .sider-menu-item-img + span {
+        transition: opacity 0.3s @ease-in-out, width 0.3s @ease-in-out;
+        opacity: 1;
+    }
+}
