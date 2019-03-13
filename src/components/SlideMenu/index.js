@@ -2,16 +2,11 @@ import { PureComponent } from 'react'
 import Block from 'fs-flex'
 import Style from './index.less'
 import { Menu, Icon } from 'antd'
+import { connect } from 'dva'
 
 const SubMenu = Menu.SubMenu
 const MenuItem = Menu.Item
 class SlideMenu extends PureComponent{
-    state = {
-        collapsed: false
-    }
-    collapsedHandle = e => {
-        this.setState({ collapsed: !this.state.collapsed })
-    }
     //获取单一菜单
     getNavMenu(menu){
         if(!menu) return []
@@ -48,14 +43,8 @@ class SlideMenu extends PureComponent{
         history.push(key)
     }
     render(){
-        const { collapsed } = this.state
-        const { data } = this.props
+        const { data, collapsed } = this.props
         return <Block w={!collapsed?180:'auto'} className={Style['bas-slide-menu']}>
-            <Block j='c' fs={18} pb={7} pt={7}>
-                <span onClick={this.collapsedHandle} style={{cursor: 'pointer'}}>
-                    <Icon type={collapsed?'menu-unfold':'menu-fold'} />
-                </span>
-            </Block>
             <Menu 
                 mode='inline'
                 inlineCollapsed={collapsed}
@@ -66,4 +55,6 @@ class SlideMenu extends PureComponent{
     }
 }
 
-export default SlideMenu
+export default connect(({ Global }) => ({
+    collapsed: Global.collapsed
+}))(SlideMenu)

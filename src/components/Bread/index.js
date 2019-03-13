@@ -1,7 +1,8 @@
 import { Component } from 'react'
-import { Breadcrumb  } from 'antd'
+import { Breadcrumb, Icon  } from 'antd'
 import { Link } from 'umi'
 import Block from 'fs-flex' 
+import { connect } from 'dva'
 
 const BreadcrumbItem = Breadcrumb.Item
 class GlobalBreadcrumb extends Component{
@@ -22,9 +23,21 @@ class GlobalBreadcrumb extends Component{
         })
         return [(extraBreadcrumbItems)]
     }
+    menuToggleHandle = () => {
+      this.props.dispatch({type: 'Global/menuToggle'})
+    }
     render(){
-        return <Block bc='#eaedf1'
-            p={10}>
+        return <Block h={40} bc='#eaedf1' wf a='c'>
+            <Block 
+              h={40} a='c' 
+              fs={18} 
+              fc='#999' 
+              bc='#f5f5f5' 
+              pl={10} pr={15} mr={15}
+              style={{cursor: 'pointer'}}
+              onClick={this.menuToggleHandle}>
+              <Icon type='menu-fold' />
+            </Block>
             <Breadcrumb>
                 {this.renderBreadcrumbView()}
             </Breadcrumb>
@@ -32,4 +45,6 @@ class GlobalBreadcrumb extends Component{
     }
 }
 
-export default GlobalBreadcrumb
+export default connect(({ Global }) => ({
+  Global
+}))(GlobalBreadcrumb)

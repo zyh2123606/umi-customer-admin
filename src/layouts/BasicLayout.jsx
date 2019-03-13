@@ -7,6 +7,7 @@ import { connect } from 'dva'
 import Header from '@/components/Header'
 import SlideMenu from '@/components/SlideMenu'
 import Breadcrumb from '@/components/Bread'
+import UpdatePwdWin from '@/components/UpdatePwd'
 import Style from './Layout.less'
 
 const formatMenu = (menuData = [], auth = [], parentName) => {
@@ -68,11 +69,15 @@ class BasicLayout extends PureComponent{
             <Header />
             <Block f={1} wf>
                 <SlideMenu data={menuData} {...this.props} />
-                <Block f={1} className={Style['bas-layout-content']}>
+                <Block vf f={1} className={Style['bas-layout-content']}>
                     <Breadcrumb data={this.breadMap} {...this.props} />
-                    {this.props.children}
+                    <Block f={1} className={Style['bas-layout-panel']}>
+                        {this.props.children}
+                    </Block>
                 </Block>
             </Block>
+            {/* 修改密码 */}
+            <UpdatePwdWin />
         </Block>
     }
 }
